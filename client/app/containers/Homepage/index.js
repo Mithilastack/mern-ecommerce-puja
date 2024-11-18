@@ -4,23 +4,23 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 
-import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import { connect } from "react-redux";
+import { Row, Col } from "reactstrap";
 
-import actions from '../../actions';
-import banners from './banners.json';
-import CarouselSlider from '../../components/Common/CarouselSlider';
-import { responsiveOneItemCarousel } from '../../components/Common/CarouselSlider/utils';
+import actions from "../../actions";
+import banners from "./banners.json";
+import CarouselSlider from "../../components/Common/CarouselSlider";
+import { responsiveOneItemCarousel } from "../../components/Common/CarouselSlider/utils";
 
 class Homepage extends React.PureComponent {
   render() {
     return (
-      <div className='homepage'>
-        <Row className='flex-row'>
-          <Col xs='12' lg='6' className='order-lg-2 mb-3 px-3 px-md-2'>
-            <div className='home-carousel'>
+      <div className="homepage">
+        <Row className="flex-row">
+          <Col xs="12" lg="6" className="order-lg-2 mb-3 px-3 px-md-2">
+            <div className="home-carousel vh-50 overflow-hidden">
               <CarouselSlider
                 swipeable={true}
                 showDots={true}
@@ -30,21 +30,31 @@ class Homepage extends React.PureComponent {
                 responsive={responsiveOneItemCarousel}
               >
                 {banners.map((item, index) => (
-                  <img key={index} src={item.imageUrl} />
+                  <img
+                    key={index}
+                    src={item.imageUrl}
+                    alt={`Slide ${index + 1}`}
+                    className="w-100 h-100"
+                    style={{
+                      objectFit: "cover",
+                    }}
+                  />
                 ))}
               </CarouselSlider>
             </div>
           </Col>
-          <Col xs='12' lg='3' className='order-lg-1 mb-3 px-3 px-md-2'>
-            <div className='d-flex flex-column h-100 justify-content-between'>
-              <img src='/images/banners/banner-2.jpg' className='mb-3' />
-              <img src='/images/banners/banner-5.jpg' />
+          <Col xs="12" lg="3" className="order-lg-1 mb-3 px-3 px-md-2">
+            <div className="d-flex flex-column h-100 justify-content-between">
+              <img src="/images/banners/banner-4.jpg" className="mb-3" />
+              
+              <img src="/images/banners/banner-5.jpg" />
             </div>
           </Col>
-          <Col xs='12' lg='3' className='order-lg-3 mb-3 px-3 px-md-2'>
-            <div className='d-flex flex-column h-100 justify-content-between'>
-              <img src='/images/banners/banner-2.jpg' className='mb-3' />
-              <img src='/images/banners/banner-6.jpg' />
+          <Col xs="12" lg="3" className="order-lg-3 mb-3 px-3 px-md-2">
+            <div className="d-flex flex-column h-100 justify-content-between">
+              <img src="/images/banners/banner-1.jpg" className="mb-3" />
+              
+              <img src="/images/banners/banner-3.jpg" />
             </div>
           </Col>
         </Row>
@@ -53,7 +63,7 @@ class Homepage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {};
 };
 
