@@ -150,11 +150,11 @@ class Navigation extends React.PureComponent {
               </Col>
               <Col md='4' className='text-center d-none d-md-block'>
                 <i className='fa fa-phone' />
-                <span>Call us 951-999-9999</span>
+                <span>Call us 70045 59882</span>
               </Col>
               <Col xs='12' className='text-center d-block d-md-none'>
                 <i className='fa fa-phone' />
-                <span> Need advice? Call us 951-999-9999</span>
+                <span> Need advice? Call us 70045 59882</span>
               </Col>
             </Row>
           </Container>
@@ -180,7 +180,7 @@ class Navigation extends React.PureComponent {
                   />
                 )}
                 <Link to='/'>
-                  <h1 className='logo'>MERN Store</h1>
+                  <h1 className='logo'>PujaVivah</h1>
                 </Link>
               </div>
             </Col>
