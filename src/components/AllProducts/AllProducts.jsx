@@ -85,7 +85,7 @@ const AllProducts = () => {
           {products.length > 0 ? (
             products.map((item, index) => (
               <div
-                className="lg:w-1/4 md:w-1/2 p-4 w-full rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
+                className="lg:w-1/4 md:w-1/2 p-4 w-full rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-3xl cursor-pointer"
                 key={item.id}
               >
                 <a className="block relative h-48 rounded overflow-hidden">
