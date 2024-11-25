@@ -22,7 +22,7 @@ const products = [
 
 const Bestseller = () => {
   return (
-    <div className="mt-8 px-4 md:px-16">
+    <div className="mt-8 px-4 md:px-16 mb-20 ">
       <h2 className="text-2xl font-bold mb-8 text-center">BESTSELLER</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {products.map((product, index) => (

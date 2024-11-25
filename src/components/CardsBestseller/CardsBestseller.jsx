@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const CardBestseller = ({ image, title, description }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-shadow hover:shadow-2xl">
-      <img src={image} alt={title} className="w-full h-56 object-cover" />
+    <div className="bg-white rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer">
+      <img src={image} alt={title} className="w-full h-56 object-cover rounded-xl" />
       <div className="p-6">
         <h3 className="text-lg font-bold">{title}</h3>
         <p className="text-gray-600">{description}</p>
