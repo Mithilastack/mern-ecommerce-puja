@@ -81,7 +81,7 @@ const AllProducts = () => {
         </div>
 
         {/* PRODUCTS SECTION */}
-        <div className="flex flex-wrap justify-center gap-9 mt-3 mb-9 ml-5 mr-9">
+        <div className="flex flex-wrap justify-center gap-10 mt-3 mb-9 ml-5 mr-9">
           {products.length > 0 ? (
             products.map((item, index) => (
               <div
