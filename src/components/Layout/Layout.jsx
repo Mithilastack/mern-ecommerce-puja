@@ -2,7 +2,10 @@ import React from 'react'
 import NavBar from '../Navbar/NavBar'
 import Footer from '../Footer/Footer'
 
-function Layout({children}) {
+function Layout({children, totalQuantity}) {
+
+  // console.log(totalQuantity)
+
   return (
     <div>
       <NavBar />

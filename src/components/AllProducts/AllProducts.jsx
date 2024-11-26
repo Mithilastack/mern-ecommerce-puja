@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
 
-const AllProducts = () => {
+const AllProducts = ({ AddToCart }) => {
   const [allCategory, setAllCategory] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectProducts, setSelectProducts] = useState("");
@@ -95,12 +95,27 @@ const AllProducts = () => {
                     src={item.thumbnail}
                   />
                 </a>
-                <div className="mt-4">
-                  <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1">${item.price}</p>
-                  <p className="mt-1">Ratings: {item.rating}</p>
+                <div className="mt-4 flex justify-between items-center">
+                  <div>
+                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-sm font-semibold">${item.price}</p>
+                    <p className="mt-1 text-xs text-gray-600 font-medium">
+                      Ratings:{" "}
+                      <span className="text-yellow-400 bg-gray-100 rounded px-1 py-1 font-bold">
+                        {item.rating
+                          ? item.rating.toFixed(1)
+                          : "No ratings yet"}
+                      </span>
+                    </p>
+                  </div>
+                  <button
+                    className="text-black w-[40%] px-1 py-2 text-sm mt-10 rounded border border-black hover:bg-red-500 hover:text-white hover:border-white transition duration-200"
+                    onClick={() => AddToCart(item)}
+                  >
+                    Add to cart
+                  </button>
                 </div>
               </div>
             ))
