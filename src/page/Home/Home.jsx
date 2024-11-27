@@ -4,12 +4,12 @@ import HeroSection from '../../components/HeroSection/HeroSection'
 
 const home = ({cart}) => {
 
-  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  // const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
-  // console.log(totalQuantity);
+  // // console.log(totalQuantity);
 
   return (
-    <Layout cart={totalQuantity}>
+    <Layout>
       <HeroSection />
     </Layout >
   )
