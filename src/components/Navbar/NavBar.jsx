@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { CartContext } from "../../CartContext";
+import { CartContext } from "../../Contexts/CartContext";
 
 const NavBar = () => {
   const { cart } = useContext(CartContext);

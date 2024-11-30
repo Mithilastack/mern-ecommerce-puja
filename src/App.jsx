@@ -5,20 +5,20 @@ import Cart from "./page/Cart/Cart";
 import AllProducts from "./components/AllProducts/AllProducts";
 import Login from "./page/Login/Login";
 import Signup from "./page/Signup/Signup";
+import ProductView from "./page/ProductView/ProductView";
 
 const App = () => {
   return (
-    
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/allproducts" element={<AllProducts />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
-    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/allproducts" element={<AllProducts />} />
+        <Route path="/productview/:productId" element={<ProductView />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
