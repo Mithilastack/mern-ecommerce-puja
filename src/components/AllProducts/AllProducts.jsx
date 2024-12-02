@@ -3,6 +3,7 @@ import axios from "axios";
 import Layout from "../Layout/Layout";
 import { CartContext } from "../../Contexts/CartContext";
 import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const AllProducts = () => {
   const { addItemToCart } = useContext(CartContext);
@@ -135,7 +136,10 @@ const AllProducts = () => {
                 className="lg:w-1/4 md:w-1/2 p-4 w-full rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-3xl cursor-pointer"
                 key={item.id}
               >
-                <Link to={`/productview/${item.id}`} className="block relative h-48 rounded overflow-hidden">
+                <Link
+                  to={`/productview/${item.id}`}
+                  className="block relative h-48 rounded overflow-hidden"
+                >
                   <img
                     alt="ecommerce"
                     className="object-cover object-center w-full h-full block bg-transparent"
@@ -160,7 +164,7 @@ const AllProducts = () => {
                   </div>
                   <button
                     className="text-black w-[40%] px-1 py-2 text-sm mt-10 rounded border border-black hover:bg-red-500 hover:text-white hover:border-white transition duration-200"
-                    onClick={() => addItemToCart(item)}
+                    onClick={() => addItemToCart(item)} // Toast will trigger from context
                   >
                     Add to cart
                   </button>
