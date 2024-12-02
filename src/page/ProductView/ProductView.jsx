@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext  } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { CartContext } from "../../Contexts/CartContext";
 
 const ProductView = () => {
+  const { addItemToCart } = useContext(CartContext);
   const { productId } = useParams(); // Get the productId from the URL params
 
   const [productView, setProductView] = useState(null); // Initialize as null instead of an array
+
+  const handleAddToCart = () => {
+    addItemToCart(productView);
+  };
 
   useEffect(() => {
     const ProductViewFetch = async () => {
@@ -71,7 +77,10 @@ const ProductView = () => {
                 <span className="title-font font-medium text-2xl text-gray-900 mt-10">
                   ${productView.price}
                 </span>
-                <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded mt-10">
+                <button
+                  className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded mt-10"
+                  onClick={handleAddToCart}
+                >
                   Add to Cart
                 </button>
               </div>
