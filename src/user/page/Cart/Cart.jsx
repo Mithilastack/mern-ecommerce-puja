@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../Contexts/CartContext";
+import { CartContext } from "../../../Contexts/CartContext";
 import "react-toastify/dist/ReactToastify.css";
 
 function Cart() {

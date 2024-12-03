@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
-import { CartContext } from "../../Contexts/CartContext";
+import { CartContext } from "../../../Contexts/CartContext";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
