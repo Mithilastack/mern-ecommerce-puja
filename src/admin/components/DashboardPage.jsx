@@ -16,7 +16,7 @@ const DashboardPage = () => {
     { name: 'Feb', orders: 150, inventory: 130 },
     { name: 'Mar', orders: 250, inventory: 120 },
     { name: 'Apr', orders: 300, inventory: 100 },
-    { name: 'May', orders: 280, inventory: 90 },
+    { name: 'May', orders: 280, inventory: 70 },
   ];
 
   // Sample data for the products pie chart
