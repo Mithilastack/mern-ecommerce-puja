@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 h-100vh bg-gray-900 text-white flex flex-col">
+    <aside className="w-64 h-screen bg-gray-900 text-white flex flex-col">
       <div className="p-4 text-lg font-bold mt-5 ml-2">Admin Panel</div>
       <nav className="flex-grow">
         <ul className="space-y-2 p-4">

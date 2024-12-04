@@ -1,20 +1,22 @@
 import React from "react";
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";  // Import Outlet to render nested routes
+import { ProductsProvider } from "./Contexts/ProductsContext"; // Import the ProductsContext provider
+import DashboardPage from "./DashboardPage";
+import Products from "../pages/Products";
+import Sidebar from "../components/Sidebar"; // Assuming you have a Sidebar component
+import { Outlet } from 'react-router-dom'; 
 
-const DashboardLayout = () => {
+const App = () => {
   return (
-    <div className="flex h-screen">
-      <Sidebar /> {/* Sidebar for admin */}
-      <div className="flex flex-col flex-grow">
-        <Navbar /> {/* Navbar for admin */}
-        <main className="flex-grow p-6 bg-gray-100">
-          <Outlet /> {/* Render the nested routes here */}
-        </main>
-      </div>
-    </div>
+    <>
+      <ProductsProvider>
+        <div className="app-container flex">
+          <Sidebar /> {/* Sidebar stays static */}
+          {/* <DashboardPage /> */}
+          <Outlet />
+        </div>
+      </ProductsProvider>
+    </>
   );
 };
 
-export default DashboardLayout;
+export default App;
