@@ -15,31 +15,35 @@ import Orders from "./admin/pages/Orders";
 import Customers from "./admin/pages/Customers";
 import Categories from "./admin/pages/Categories";
 
+// Import the AuthProvider
+import { AuthProvider } from "./Contexts/AuthContext"; // Adjust the path if needed
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+    <AuthProvider> {/* Wrap your app with AuthProvider */}
+      <BrowserRouter>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
 
-      <Routes>
-        {/* User routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/allproducts" element={<AllProducts />} />
-        <Route path="/productview/:productId" element={<ProductView />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Routes>
+          {/* User routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/allproducts" element={<AllProducts />} />
+          <Route path="/productview/:productId" element={<ProductView />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
-        {/* Admin routes (with Sidebar and DashboardLayout) */}
-        <Route path="/admin" element={<DashboardLayout />}>
-          <Route index element={<DashboardPage />} />  {/* Dashboard default route */}
-          <Route path="products" element={<Products />} /> {/* Products route */}
-          <Route path="orders" element={<Orders />} /> 
-          <Route path="customers" element={<Customers />} /> 
-          <Route path="categories" element={<Categories />} /> 
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* Admin routes (with Sidebar and DashboardLayout) */}
+          <Route path="/admin" element={<DashboardLayout />}>
+            <Route index element={<DashboardPage />} />  {/* Dashboard default route */}
+            <Route path="products" element={<Products />} /> {/* Products route */}
+            <Route path="orders" element={<Orders />} /> 
+            <Route path="customers" element={<Customers />} /> 
+            <Route path="categories" element={<Categories />} /> 
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
