@@ -1,11 +1,14 @@
+import img1 from "../user/components/assets/images/banner-2.jpeg"
+
 export const products = [
+
   {
     "id": 1,
     "title": "Satyanarayan Puja Package",
     "description": "Complete Satyanarayan Puja with all necessary items.",
     "price": 100,
     "rating": 4.5,
-    "image": "/src/user/components/assets/images/banner-2.jpeg",
+    "image": img1,
     "items": [
       {
         "id": 1,
@@ -86,7 +89,7 @@ export const products = [
     description: "Everything you need for a complete Diwali Puja.",
     price: 120,
     rating: 4.7,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -166,7 +169,7 @@ export const products = [
     description: "Special package for Navratri festival.",
     price: 150,
     rating: 4.8,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -246,7 +249,7 @@ export const products = [
     description: "Complete Ganesh Puja set for the festival.",
     price: 110,
     rating: 4.6,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -326,7 +329,7 @@ export const products = [
     description: "Complete wedding ritual items.",
     price: 200,
     rating: 5,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -406,7 +409,7 @@ export const products = [
     description: "Everything you need for Kali Puja ceremonies.",
     price: 130,
     rating: 4.7,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -486,7 +489,7 @@ export const products = [
     description: "All the essentials for celebrating Chhath Puja.",
     price: 140,
     rating: 4.8,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -566,7 +569,7 @@ export const products = [
     description: "Essentials for the grand Shiv Puja.",
     price: 125,
     rating: 4.9,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -646,7 +649,7 @@ export const products = [
     description: "All necessary items for a Bhoomi Puja ceremony.",
     price: 135,
     rating: 4.6,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -726,7 +729,7 @@ export const products = [
     description: "Complete package for performing a Havan ceremony.",
     price: 150,
     rating: 4.8,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
@@ -806,7 +809,7 @@ export const products = [
     description: "Essential items for the nine-night Navratri festival.",
     price: 180,
     rating: 4.9,
-    image: "/src/user/components/assets/images/banner-2.jpeg",
+    image: img1,
     items: [
       {
         id: 1,
