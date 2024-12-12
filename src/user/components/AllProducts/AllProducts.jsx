@@ -19,6 +19,7 @@ const AllProducts = () => {
     const fetchAllProducts = async () => {
       try {
         const res = await axios("https://dummyjson.com/products");
+        console.log(res.data)
         setAllProducts(res.data.products); // Assuming `products` is the array from the API response
       } catch (error) {
         console.log(error);

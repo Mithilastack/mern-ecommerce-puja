@@ -14,6 +14,7 @@ import Products from "./admin/pages/Products";
 import Orders from "./admin/pages/Orders";
 import Customers from "./admin/pages/Customers";
 import Categories from "./admin/pages/Categories";
+import PackageView from "./user/components/packageView/packageView"; // Import the new PackageView component
 
 // Import the AuthProvider
 import { AuthProvider } from "./Contexts/AuthContext"; // Adjust the path if needed
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/allproducts" element={<AllProducts />} />
           <Route path="/productview/:productId" element={<ProductView />} />
+          <Route path="/packageview/:id" element={<PackageView />} /> {/* New route */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
