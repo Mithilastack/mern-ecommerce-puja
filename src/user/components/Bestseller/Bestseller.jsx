@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import banner2 from "../assets/images/banner-2.jpeg";
-
-// Named export for products
 import { products } from "../../../data/data"; // Named import
 
-// Default export for Bestseller component
+const ITEMS_PER_PAGE = 6; // Number of items per page
+
 const Bestseller = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the start and end index of items for the current page
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Function to change the page
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Calculate total pages
+  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+
   return (
     <div className="mt-8 px-4 md:px-16 mb-20">
       <div className="flex items-center mb-8">
@@ -19,8 +32,8 @@ const Bestseller = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-10 mt-3 mb-9 ml-5 mr-9">
-        {products.length > 0 ? (
-          products.map((item) => (
+        {currentItems.length > 0 ? (
+          currentItems.map((item) => (
             <div
               className="lg:w-1/4 md:w-1/2 p-4 w-full rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-3xl cursor-pointer"
               key={item.id}
@@ -49,18 +62,55 @@ const Bestseller = () => {
                     </span>
                   </p>
                 </div>
-                {/* <button
-                  className="text-black w-[40%] px-1 py-2 text-sm mt-10 rounded border border-black hover:bg-red-500 hover:text-white hover:border-white transition duration-200"
-                  onClick={() => console.log(`Added ${item.title} to cart`)}
-                >
-                  Add to cart
-                </button> */}
               </div>
             </div>
           ))
         ) : (
           <p>No products available</p>
         )}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center items-center mt-6 space-x-3">
+        <button
+          className={`px-4 py-2 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 transition duration-200 ease-in-out ${
+            currentPage === 1 ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          onClick={() =>
+            handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
+          }
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            className={`px-4 py-2 text-sm font-medium text-gray-600 border border-transparent rounded-md transition duration-200 ease-in-out hover:border-gray-300 hover:bg-gray-100 ${
+              currentPage === index + 1
+                ? "bg-gray-300 text-gray-700"
+                : "bg-transparent"
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          className={`px-4 py-2 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-100 transition duration-200 ease-in-out ${
+            currentPage === totalPages ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          onClick={() =>
+            handlePageChange(
+              currentPage < totalPages ? currentPage + 1 : totalPages
+            )
+          }
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

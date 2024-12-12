@@ -26,42 +26,48 @@ const PackageView = () => {
 
             {/* Package Details */}
             <div className="w-full md:w-1/2 p-6">
-              <h1 className="text-2xl font-bold text-gray-800 mb-4">
-                {packageView.title}
-              </h1>
-              <p className="text-gray-600 mb-4">{packageView.description}</p>
-              <div className="flex items-center mb-4">
-                <span className="text-yellow-400 text-sm">
-                  ⭐ {packageView.rating}
-                </span>
-                <span className="text-gray-600 ml-2">
-                  {packageView.reviews} Reviews
-                </span>
-              </div>
-              {/* Move Package Items below */}
-              <div className="mt-10 ml-auto">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                  Package Items
-                </h3>
-                <ItemsTable items={packageView.items} />
-              </div>
-              <div className="flex items-center">
-                <span className="text-2xl font-bold text-gray-800">
-                  ${packageView.price}
-                </span>
-                <button
-                  className="ml-auto bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                  onClick={() =>
-                    console.log(`Added ${packageView.title} to cart`)
-                  }
-                >
-                  Add to Cart
-                </button>
+              {/* Single Scrollable Container for Description and Table */}
+              <div className="h-full overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-800 mb-4">
+                    {packageView.title}
+                  </h1>
+                  <p className="text-gray-600 mb-4">{packageView.description}</p>
+                  <div className="flex items-center mb-4">
+                    <span className="text-yellow-400 text-sm">
+                      ⭐ {packageView.rating}
+                    </span>
+                    <span className="text-gray-600 ml-2">
+                      {packageView.reviews} Reviews
+                    </span>
+                  </div>
+                </div>
+
+                {/* Package Items Section */}
+                <div className="mt-10">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    Package Items
+                  </h3>
+                  <ItemsTable items={packageView.items} />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Sticky Add to Cart and Price Section */}
+      <div className="sticky bottom-5 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-lg py-4 px-5 w-full max-w-lg flex items-center justify-between z-10">
+        <span className="text-2xl font-bold text-gray-800">
+          ${packageView.price}
+        </span>
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          onClick={() => console.log(`Added ${packageView.title} to cart`)}
+        >
+          Add to Cart
+        </button>
+      </div>
     </Layout>
   );
 };
