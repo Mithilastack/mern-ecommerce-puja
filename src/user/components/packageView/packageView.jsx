@@ -7,7 +7,7 @@ import { CartContext } from "../../../Contexts/CartContext";
 
 const PackageView = () => {
   const { id } = useParams();
-  const { addItemToCart, totalPrice } = useContext(CartContext); 
+  const { addItemToCart, totalPrice } = useContext(CartContext);
   const packageView = products.find((item) => item.id === parseInt(id));
 
   // Initialize the selectedItems state as an object where each item is selected by default
@@ -18,13 +18,16 @@ const PackageView = () => {
     if (packageView) {
       // Initialize selectedItems to true for all items by default
       const initialSelectedItems = packageView.items.reduce((acc, item) => {
-        acc[item.id] = true;  // Mark all items as selected initially
+        acc[item.id] = true; // Mark all items as selected initially
         return acc;
       }, {});
       setSelectedItems(initialSelectedItems);
 
       // Calculate the total price of all selected items initially
-      const initialTotal = packageView.items.reduce((acc, item) => acc + item.price, 0);
+      const initialTotal = packageView.items.reduce(
+        (acc, item) => acc + item.price,
+        0
+      );
       setPackageTotal(initialTotal);
     }
   }, [packageView]);
@@ -43,13 +46,21 @@ const PackageView = () => {
 
   const handleAddToCart = () => {
     // Add the package with selected items to the cart
-    const selectedPackageItems = packageView.items.filter(item => selectedItems[item.id]);
-    addItemToCart({ ...packageView, items: selectedPackageItems, price: packageTotal });
+    const selectedPackageItems = packageView.items.filter(
+      (item) => selectedItems[item.id]
+    );
+    addItemToCart({
+      ...packageView,
+      items: selectedPackageItems,
+      price: packageTotal,
+    });
   };
 
   if (!packageView) return <p>Package not found</p>;
 
-  const items = Array.isArray(packageView.items) ? packageView.items : Object.values(packageView.items || {});
+  const items = Array.isArray(packageView.items)
+    ? packageView.items
+    : Object.values(packageView.items || {});
 
   return (
     <Layout>
@@ -86,8 +97,24 @@ const PackageView = () => {
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">
                     Package Items
                   </h3>
-                  <ItemsTable items={items} selectedItems={selectedItems} onUpdateTotalPrice={handleUpdateTotalPrice} />
+                  <ItemsTable
+                    items={items}
+                    selectedItems={selectedItems}
+                    onUpdateTotalPrice={handleUpdateTotalPrice}
+                  />
                 </div>
+              </div>
+              <div className="sticky bottom-5 bg-white shadow-xl rounded-lg py-6 px-8 w-full max-w-lg flex items-center justify-between z-10 transform transition-all duration-300 ease-in-out">
+                <span className="text-2xl font-bold text-gray-800">
+                  ₹{packageTotal.toLocaleString()}{" "}
+                  {/* Show updated total price */}
+                </span>
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-200"
+                  onClick={handleAddToCart}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
@@ -95,17 +122,6 @@ const PackageView = () => {
       </section>
 
       {/* Sticky Add to Cart and Price Section */}
-      <div className="sticky bottom-5 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-lg py-4 px-5 w-full max-w-lg flex items-center justify-between z-10">
-        <span className="text-2xl font-bold text-gray-800">
-          ₹{packageTotal} {/* Show updated total price */}
-        </span>
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-          onClick={handleAddToCart}
-        >
-          Add to Cart
-        </button>
-      </div>
     </Layout>
   );
 };
