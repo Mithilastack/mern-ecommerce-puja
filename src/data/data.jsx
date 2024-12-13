@@ -1,88 +1,66 @@
-import img1 from "../user/components/assets/images/banner-2.jpeg"
+import img1 from "../user/components/assets/images/banner-2.jpeg";
 
 export const products = [
-
   {
-    "id": 1,
-    "title": "Satyanarayan Puja Package",
-    "description": "Complete Satyanarayan Puja with all necessary items.",
-    "price": 100,
-    "rating": 4.5,
-    "image": img1,
-    "items": [
+    id: 1,
+    title: "Satyanarayan Puja Package",
+    description: "Complete Satyanarayan Puja with all necessary items.",
+    price: 2500,
+    rating: 4.5,
+    image: img1,
+    items: [
       {
-        "id": 1,
-        "name": "Flower",
-        "description": "Fresh flowers for worship",
-        "quantity": "2 kg",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
+        id: 1,
+        name: "Fruits",
+        description:
+          "Four varieties of fruits (2 pieces each) and 1 dozen bananas.",
+        quantity: 200,
+        price: 500,
+        image:
+          "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
       },
       {
-        "id": 2,
-        "name": "Incense",
-        "description": "High-quality incense sticks",
-        "quantity": "10 sticks",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
+        id: 2,
+        name: "Sweets",
+        description:
+          "Four varieties of sweets (2 pieces each) and laddoo (1.25 kg).",
+        quantity: "Approx. ₹200-₹300",
+        price: 500,
+        image:
+          "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
       },
       {
-        "id": 3,
-        "name": "Oil Lamp",
-        "description": "Small oil lamp",
-        "quantity": "1",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
+        id: 3,
+        name: "Milk & Curd",
+        description: "Milk (1 liter) and curd (500g).",
+        quantity: 125,
+        price: 500,
+        image:
+          "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
       },
       {
-        "id": 4,
-        "name": "Chandan",
-        "description": "Chandan powder for rituals",
-        "quantity": "100g",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
+        id: 4,
+        name: "Basic Puja Items",
+        description:
+          "Includes Akshat, Ganga Jal, flowers, kalash, bell, asan, and other essentials.",
+        quantity: "To be arranged by user or market-sourced",
+        price: 500,
+        image:
+          "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
       },
       {
-        "id": 5,
-        "name": "Camphor",
-        "description": "Camphor for rituals",
-        "quantity": "10 pieces",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
+        id: 5,
+        name: "Hawan Items",
+        description:
+          "Samagri, hawan wood, ghee, and extras (saar, dhup, supari, til).",
+        quantity: 200,
+        price: 500,
+        image:
+          "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
       },
-      {
-        "id": 6,
-        "name": "Kalash",
-        "description": "Kalash for puja ceremony",
-        "quantity": "1",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
-      },
-      {
-        "id": 7,
-        "name": "Sandalwood",
-        "description": "Sandalwood for offerings",
-        "quantity": "50g",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
-      },
-      {
-        "id": 8,
-        "name": "Rice",
-        "description": "Sacred rice for offering",
-        "quantity": "500g",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
-      },
-      {
-        "id": 9,
-        "name": "Bell",
-        "description": "Bell for temple rituals",
-        "quantity": "1",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
-      },
-      {
-        "id": 10,
-        "name": "Puja Thali",
-        "description": "Puja thali for offerings",
-        "quantity": "1",
-        "image": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291"
-      }
-    ]
+    ],
   },
-  
+
   {
     id: 2,
     title: "Diwali Puja Package",

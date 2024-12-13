@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import { products } from "../../../data/data";
 import ItemsTable from "../ItemsTable/ItemsTable";
+import { CartContext } from "../../../Contexts/CartContext";
 
 const PackageView = () => {
   const { id } = useParams();
+  const { addItemToCart, totalPrice } = useContext(CartContext); 
   const packageView = products.find((item) => item.id === parseInt(id));
 
+  // To track the selected items' price in the package
+  const [packageTotal, setPackageTotal] = useState(packageView?.price || 0);
+
+  useEffect(() => {
+    // Update packageTotal whenever the cart price changes
+    setPackageTotal(totalPrice);
+  }, [totalPrice]);
+
   if (!packageView) return <p>Package not found</p>;
+
+  // Ensure packageView.items is an array (convert if it's an object)
+  const items = Array.isArray(packageView.items) ? packageView.items : Object.values(packageView.items || {});
+
+  // Handle Add to Cart logic
+  const handleAddToCart = () => {
+    // Add the total price of selected items to the cart
+    addItemToCart({ ...packageView, price: packageTotal });
+  };
 
   return (
     <Layout>
@@ -19,28 +38,25 @@ const PackageView = () => {
             <div className="w-full md:w-1/2">
               <img
                 alt={packageView.title}
-                className="h-full w-full object-cover"
+                className="h-60vh w-full object-cover"
                 src={packageView.image || "https://dummyimage.com/400x400"}
               />
             </div>
 
             {/* Package Details */}
             <div className="w-full md:w-1/2 p-6">
-              {/* Single Scrollable Container for Description and Table */}
-              <div className="h-full overflow-y-auto" style={{ maxHeight: 'calc(100vh - 120px)' }}>
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-4">
-                    {packageView.title}
-                  </h1>
-                  <p className="text-gray-600 mb-4">{packageView.description}</p>
-                  <div className="flex items-center mb-4">
-                    <span className="text-yellow-400 text-sm">
-                      ⭐ {packageView.rating}
-                    </span>
-                    <span className="text-gray-600 ml-2">
-                      {packageView.reviews} Reviews
-                    </span>
-                  </div>
+              <div className="h-full">
+                <h1 className="text-2xl font-bold text-gray-800 mb-4">
+                  {packageView.title}
+                </h1>
+                <p className="text-gray-600 mb-4">{packageView.description}</p>
+                <div className="flex items-center mb-4">
+                  <span className="text-yellow-400 text-sm">
+                    ⭐ {packageView.rating}
+                  </span>
+                  <span className="text-gray-600 ml-2">
+                    {packageView.reviews} Reviews
+                  </span>
                 </div>
 
                 {/* Package Items Section */}
@@ -48,7 +64,7 @@ const PackageView = () => {
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">
                     Package Items
                   </h3>
-                  <ItemsTable items={packageView.items} />
+                  <ItemsTable items={items} onUpdateTotalPrice={setPackageTotal} />
                 </div>
               </div>
             </div>
@@ -59,11 +75,11 @@ const PackageView = () => {
       {/* Sticky Add to Cart and Price Section */}
       <div className="sticky bottom-5 left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-lg py-4 px-5 w-full max-w-lg flex items-center justify-between z-10">
         <span className="text-2xl font-bold text-gray-800">
-          ${packageView.price}
+          ₹{packageTotal} {/* Show updated total price */}
         </span>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-          onClick={() => console.log(`Added ${packageView.title} to cart`)}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </button>
