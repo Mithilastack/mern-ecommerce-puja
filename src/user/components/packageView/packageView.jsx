@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import { products } from "../../../data/data";
 import ItemsTable from "../ItemsTable/ItemsTable";
 import { CartContext } from "../../../Contexts/CartContext";
+import Gallery from "../gallery/Gallery";
 
 const PackageView = () => {
   const { id } = useParams();
@@ -64,65 +65,58 @@ const PackageView = () => {
 
   return (
     <Layout>
-      <section className="text-gray-600 body-font">
-        <div className="container mx-auto px-5 py-10">
-          <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-            {/* Package Image */}
-            <div className="w-full md:w-1/2">
-              <img
-                alt={packageView.title}
-                className="h-60vh w-full object-cover"
-                src={packageView.image || "https://dummyimage.com/400x400"}
+  <section className="text-gray-600 body-font">
+    <div className="container mx-auto px-5 py-10">
+      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
+        {/* Gallery Section */}
+        <Gallery packageView={packageView} />
+
+        {/* Package Details */}
+        <div className="w-full md:w-1/2 p-6">
+          <div className="h-full">
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              {packageView.title}
+            </h1>
+            <p className="text-gray-600 mb-4">{packageView.description}</p>
+            <div className="flex items-center mb-4">
+              <span className="text-yellow-400 text-sm">
+                ⭐ {packageView.rating}
+              </span>
+              <span className="text-gray-600 ml-2">
+                {packageView.reviews} Reviews
+              </span>
+            </div>
+
+            {/* Package Items Section */}
+            <div className="mt-10">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                Package Items
+              </h3>
+              <ItemsTable
+                items={items}
+                selectedItems={selectedItems}
+                onUpdateTotalPrice={handleUpdateTotalPrice}
               />
             </div>
-
-            {/* Package Details */}
-            <div className="w-full md:w-1/2 p-6">
-              <div className="h-full">
-                <h1 className="text-2xl font-bold text-gray-800 mb-4">
-                  {packageView.title}
-                </h1>
-                <p className="text-gray-600 mb-4">{packageView.description}</p>
-                <div className="flex items-center mb-4">
-                  <span className="text-yellow-400 text-sm">
-                    ⭐ {packageView.rating}
-                  </span>
-                  <span className="text-gray-600 ml-2">
-                    {packageView.reviews} Reviews
-                  </span>
-                </div>
-
-                {/* Package Items Section */}
-                <div className="mt-10">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                    Package Items
-                  </h3>
-                  <ItemsTable
-                    items={items}
-                    selectedItems={selectedItems}
-                    onUpdateTotalPrice={handleUpdateTotalPrice}
-                  />
-                </div>
-              </div>
-              <div className="sticky bottom-5 bg-white shadow-xl rounded-lg py-6 px-8 w-full max-w-lg flex items-center justify-between z-10 transform transition-all duration-300 ease-in-out">
-                <span className="text-2xl font-bold text-gray-800">
-                  ₹{packageTotal.toLocaleString()}{" "}
-                  {/* Show updated total price */}
-                </span>
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-200"
-                  onClick={handleAddToCart}
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
+          </div>
+          <div className="sticky bottom-5 bg-white shadow-xl rounded-lg py-6 px-8 w-full max-w-lg flex items-center justify-between z-10 transform transition-all duration-300 ease-in-out">
+            <span className="text-2xl font-bold text-gray-800">
+              ₹{packageTotal.toLocaleString()}{" "}
+              {/* Show updated total price */}
+            </span>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-200"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
+</Layout>
 
-      {/* Sticky Add to Cart and Price Section */}
-    </Layout>
   );
 };
 
