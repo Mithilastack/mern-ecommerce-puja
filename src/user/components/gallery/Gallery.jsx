@@ -14,92 +14,53 @@ const Gallery = ({ packageView }) => {
     setShowMoreImages(!showMoreImages);
   };
 
-  // Limit the visible images to 3 initially
-  const visibleItems = showMoreImages ? packageView.items : packageView.items?.slice(0, 3);
+  // Combine the main image with the rest of the images
+  const galleryImages = [
+    { image: packageView.image || "https://dummyimage.com/100x100", name: "Main Image" },
+    ...packageView.items,
+  ];
 
   return (
     <div className="flex flex-col items-center">
-      {/* Main Image Display */}
+      {/* Main Image */}
       <div className="w-full max-w-sm mb-4">
         <img
           src={selectedImage}
           alt="Selected Package"
-          className="rounded-lg shadow-lg object-cover w-full h-auto"
+          className="rounded-lg shadow-lg object-cover w-full aspect-square"
         />
       </div>
 
-      {/* Thumbnail Section */}
-      <div className="w-full max-w-sm flex gap-3 overflow-x-auto flex-nowrap mb-4">
-        {/* Package Image */}
-        <button
-          onClick={() =>
-            handleImageClick(packageView.image || "https://dummyimage.com/400x400")
-          }
-          className={`w-20 h-20 border-2 rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${
-            selectedImage === packageView.image
-              ? "border-red-500"
-              : "border-gray-300"
-          }`}
-        >
-          <img
-            src={packageView.image || "https://dummyimage.com/400x400"}
-            alt="Package Thumbnail"
-            className="object-cover w-full h-full"
-          />
-        </button>
-
-        {/* Item Images */}
-        {visibleItems?.map((item) => (
+      {/* Thumbnails Section */}
+      <div className="w-full max-w-sm grid grid-cols-4 gap-3 mb-4">
+        {/* Display up to 4 thumbnails */}
+        {(showMoreImages ? galleryImages : galleryImages.slice(0, 4)).map((item, index) => (
           <button
-            key={item.id}
-            onClick={() => handleImageClick(item.image || "https://dummyimage.com/100x100")}
-            className={`w-20 h-20 border-2 rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${
+            key={index}
+            onClick={() => handleImageClick(item.image)}
+            className={`w-20 h-20 border-2 rounded-lg overflow-hidden transition-transform transform hover:scale-110 ${
               selectedImage === item.image
                 ? "border-red-500"
                 : "border-gray-300"
             }`}
           >
             <img
-              src={item.image || "https://dummyimage.com/100x100"}
-              alt={item.name}
+              src={item.image}
+              alt={item.name || `Image ${index + 1}`}
               className="object-cover w-full h-full"
             />
           </button>
         ))}
       </div>
 
-      {/* "+3" Button for extra images */}
-      {packageView.items?.length > 3 && !showMoreImages && (
+      {/* "+X More" Button */}
+      {!showMoreImages && galleryImages.length > 4 && (
         <button
           onClick={handleShowMoreImages}
-          className="w-20 h-20 border-2 rounded-lg flex items-center justify-center bg-gray-200 text-gray-600 font-semibold mb-4"
+          className="w-full max-w-sm h-10 border-2 rounded-lg bg-gray-200 text-gray-600 font-semibold flex items-center justify-center mb-4"
         >
-          +{packageView.items.length - 3}
+          +{galleryImages.length - 4} More
         </button>
-      )}
-
-      {/* Display extra images below when +3 is clicked */}
-      {showMoreImages && (
-        <div className="w-full max-w-sm flex gap-3 flex-wrap mb-4">
-          {/* Displaying the remaining images */}
-          {packageView.items?.slice(3).map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleImageClick(item.image || "https://dummyimage.com/100x100")}
-              className={`w-20 h-20 border-2 rounded-lg overflow-hidden transition-transform transform hover:scale-105 ${
-                selectedImage === item.image
-                  ? "border-red-500"
-                  : "border-gray-300"
-              }`}
-            >
-              <img
-                src={item.image || "https://dummyimage.com/100x100"}
-                alt={item.name}
-                className="object-cover w-full h-full"
-              />
-            </button>
-          ))}
-        </div>
       )}
     </div>
   );
