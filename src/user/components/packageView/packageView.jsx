@@ -10,24 +10,46 @@ const PackageView = () => {
   const { addItemToCart, totalPrice } = useContext(CartContext); 
   const packageView = products.find((item) => item.id === parseInt(id));
 
-  // To track the selected items' price in the package
-  const [packageTotal, setPackageTotal] = useState(packageView?.price || 0);
+  // Initialize the selectedItems state as an object where each item is selected by default
+  const [selectedItems, setSelectedItems] = useState({});
+  const [packageTotal, setPackageTotal] = useState(0);
 
   useEffect(() => {
-    // Update packageTotal whenever the cart price changes
-    setPackageTotal(totalPrice);
-  }, [totalPrice]);
+    if (packageView) {
+      // Initialize selectedItems to true for all items by default
+      const initialSelectedItems = packageView.items.reduce((acc, item) => {
+        acc[item.id] = true;  // Mark all items as selected initially
+        return acc;
+      }, {});
+      setSelectedItems(initialSelectedItems);
+
+      // Calculate the total price of all selected items initially
+      const initialTotal = packageView.items.reduce((acc, item) => acc + item.price, 0);
+      setPackageTotal(initialTotal);
+    }
+  }, [packageView]);
+
+  useEffect(() => {
+    // Whenever selectedItems changes, recalculate the total price
+    const newTotal = packageView.items.reduce((acc, item) => {
+      return selectedItems[item.id] ? acc + item.price : acc;
+    }, 0);
+    setPackageTotal(newTotal);
+  }, [selectedItems, packageView]);
+
+  const handleUpdateTotalPrice = (updatedSelectedItems) => {
+    setSelectedItems(updatedSelectedItems);
+  };
+
+  const handleAddToCart = () => {
+    // Add the package with selected items to the cart
+    const selectedPackageItems = packageView.items.filter(item => selectedItems[item.id]);
+    addItemToCart({ ...packageView, items: selectedPackageItems, price: packageTotal });
+  };
 
   if (!packageView) return <p>Package not found</p>;
 
-  // Ensure packageView.items is an array (convert if it's an object)
   const items = Array.isArray(packageView.items) ? packageView.items : Object.values(packageView.items || {});
-
-  // Handle Add to Cart logic
-  const handleAddToCart = () => {
-    // Add the total price of selected items to the cart
-    addItemToCart({ ...packageView, price: packageTotal });
-  };
 
   return (
     <Layout>
@@ -64,7 +86,7 @@ const PackageView = () => {
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">
                     Package Items
                   </h3>
-                  <ItemsTable items={items} onUpdateTotalPrice={setPackageTotal} />
+                  <ItemsTable items={items} selectedItems={selectedItems} onUpdateTotalPrice={handleUpdateTotalPrice} />
                 </div>
               </div>
             </div>
