@@ -65,30 +65,36 @@ const PackageView = () => {
 
   return (
     <Layout>
-      <section className="text-gray-600 body-font">
-        <div className="container mx-auto px-5 py-10">
-          <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-            {/* Gallery Section */}
+    <section className="text-gray-600 body-font bg-white">
+      <div className="container mx-auto px-5 py-10">
+        <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
+          {/* Gallery Section */}
+          <div className="w-full md:w-1/2 bg-white p-4">
             <Gallery packageView={packageView} />
-
-            {/* Package Details */}
-            <div className="w-full md:w-1/2 p-6">
-              <div className="h-full">
-                <h1 className="text-2xl font-bold text-gray-800 mb-4">
+          </div>
+  
+          {/* Package Details */}
+          <div className="w-full md:w-1/2 p-6">
+            <div className="h-full flex flex-col justify-between">
+              {/* Title, Description, and Rating */}
+              <div>
+                <h1 className="text-3xl font-bold text-gray-800 mb-4">
                   {packageView.title}
                 </h1>
-                <p className="text-gray-600 mb-4">{packageView.description}</p>
-                <div className="flex items-center mb-4">
-                  <span className="text-yellow-400 text-sm">
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  {packageView.description}
+                </p>
+                <div className="flex items-center mb-6">
+                  <span className="text-yellow-400 text-lg flex items-center">
                     ⭐ {packageView.rating}
                   </span>
-                  <span className="text-gray-600 ml-2">
+                  <span className="text-gray-600 ml-3 text-sm">
                     {packageView.reviews} Reviews
                   </span>
                 </div>
-
+  
                 {/* Package Items Section */}
-                <div className="mt-10">
+                <div>
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">
                     Package Items
                   </h3>
@@ -99,10 +105,11 @@ const PackageView = () => {
                   />
                 </div>
               </div>
-              <div className="sticky bottom-5 bg-white shadow-xl rounded-lg py-6 px-8 w-full max-w-lg flex items-center justify-between z-10 transform transition-all duration-300 ease-in-out">
+  
+              {/* Sticky Footer for Total Price and Add to Cart */}
+              <div className="sticky bottom-0 bg-white shadow-md rounded-lg py-6 px-8 mt-6 w-full flex items-center justify-between z-10">
                 <span className="text-2xl font-bold text-gray-800">
-                  ₹{packageTotal.toLocaleString()}{" "}
-                  {/* Show updated total price */}
+                  ₹{packageTotal.toLocaleString()}
                 </span>
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-200"
@@ -114,8 +121,13 @@ const PackageView = () => {
             </div>
           </div>
         </div>
-      </section>
-    </Layout>
+      </div>
+    </section>
+  </Layout>
+  
+  
+
+
   );
 };
 
