@@ -66,8 +66,7 @@ const ItemsTable = ({ items, selectedItems, onUpdateTotalPrice }) => {
             </th>
             <th className="py-3 px-6 text-center text-sm font-semibold text-gray-600">
               Details
-            </th>{" "}
-            {/* Centered Details */}
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
@@ -75,9 +74,7 @@ const ItemsTable = ({ items, selectedItems, onUpdateTotalPrice }) => {
             items.map((item) => (
               <React.Fragment key={item.id}>
                 <tr className="hover:bg-gray-50">
-                  <td className="py-4 px-6 text-sm text-gray-800">
-                    {item.name}
-                  </td>
+                  <td className="py-4 px-6 text-sm text-gray-800">{item.name}</td>
                   <td className="py-4 px-6 text-sm text-gray-500">
                     ₹{item.price * (quantities[item.id] || 1)}
                   </td>

@@ -47,8 +47,11 @@ const NavBar = () => {
                 All Products
               </li>
             </Link>
-            <li className="mr-5 hover:text-gray-900 cursor-pointer">Shadi</li>
-            <li className="mr-5 hover:text-gray-900 cursor-pointer">Contact</li>
+          
+            
+            <Link to="/contactus">
+              <li className="mr-5 hover:text-gray-900 cursor-pointer">Contact Us</li>
+            </Link>
           </ul>
         </nav>
 
@@ -61,12 +64,10 @@ const NavBar = () => {
               <Link to="/allproducts" onClick={ToggleClose}>
                 <li className="hover:text-gray-300">All Products</li>
               </Link>
-              <li className="hover:text-gray-300" onClick={ToggleClose}>
-                Shadi
-              </li>
-              <li className="hover:text-gray-300" onClick={ToggleClose}>
-                Contact
-              </li>
+              
+              <Link to="/contactus" onClick={ToggleClose}>
+                <li className="hover:text-gray-300">Contact Us</li>
+              </Link>
             </ul>
             <button
               aria-label="Close menu"
