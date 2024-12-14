@@ -14,7 +14,7 @@ export const products = [
         name: "Fruits",
         description:
           "Four varieties of fruits (2 pieces each) and 1 dozen bananas.",
-        quantity: 200,
+
         price: 500,
         image:
           "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
@@ -24,7 +24,7 @@ export const products = [
         name: "Sweets",
         description:
           "Four varieties of sweets (2 pieces each) and laddoo (1.25 kg).",
-        quantity: "Approx. ₹200-₹300",
+
         price: 500,
         image:
           "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
@@ -33,7 +33,7 @@ export const products = [
         id: 3,
         name: "Milk & Curd",
         description: "Milk (1 liter) and curd (500g).",
-        quantity: 125,
+
         price: 500,
         image:
           "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
@@ -43,7 +43,7 @@ export const products = [
         name: "Basic Puja Items",
         description:
           "Includes Akshat, Ganga Jal, flowers, kalash, bell, asan, and other essentials.",
-        quantity: "To be arranged by user or market-sourced",
+
         price: 500,
         image:
           "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
@@ -53,7 +53,7 @@ export const products = [
         name: "Hawan Items",
         description:
           "Samagri, hawan wood, ghee, and extras (saar, dhup, supari, til).",
-        quantity: 200,
+
         price: 500,
         image:
           "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1080/app/assets/products/sliding_images/jpeg/b20a0074-d4a3-4479-8090-ad5394866a33.jpg?ts=1732177291",
