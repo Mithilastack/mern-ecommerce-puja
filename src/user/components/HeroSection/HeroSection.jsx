@@ -25,9 +25,9 @@ function HeroSection() {
     autoplaySpeed: 2000, // Autoplay delay
     slidesToShow: 1, // Show 1 slide at a time
     slidesToScroll: 1, // Scroll 1 slide at a time
-    arrows: false, // Remove the icon buttons (prev/next)
-    centerMode: true, // Enable center mode for mobile and desktop
-    centerPadding: "10%", // Add padding on both sides of the centered slide
+    arrows: false, 
+    centerMode: true, // Center the current slide
+    centerPadding: "10%", // Padding for centered slide
     focusOnSelect: true, // Focus on selected slide
     responsive: [
       {
@@ -35,7 +35,7 @@ function HeroSection() {
         settings: {
           slidesToShow: 1, // Show 1 slide at once on tablets
           slidesToScroll: 1,
-          centerPadding: "20%", // Slightly higher padding on tablets
+          centerPadding: "15%", // More padding on tablets
         },
       },
       {
@@ -43,7 +43,7 @@ function HeroSection() {
         settings: {
           slidesToShow: 1, // Show 1 slide at a time
           slidesToScroll: 1,
-          centerPadding: "10%", // Smaller padding for mobile
+          centerPadding: "0", // No padding on mobile
         },
       },
     ],
@@ -57,12 +57,12 @@ function HeroSection() {
           (banner, index) => (
             <div
               key={index}
-              className="px-2 focus:outline-none focus:border-none" // Remove focus outline and border from container
+              className="px-2 focus:outline-none focus:border-none relative"
             >
               <img
                 src={banner}
                 alt={`Banner ${index + 1}`}
-                className="w-full h-[350px] lg:h-[450px] object-cover object-center rounded-md shadow-md focus:outline-none focus:border-none" // Set height to ensure image fits well
+                className="w-full h-[180px] lg:h-[380px] object-cover object-center rounded-md shadow-md"
               />
             </div>
           )

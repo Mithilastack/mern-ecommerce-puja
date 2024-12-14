@@ -79,8 +79,8 @@ const PackageView = () => {
     <Layout>
       <section className="text-gray-600 body-font bg-white">
         <div className="container mx-auto px-5 py-10">
-          <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-            {/* Gallery Section */}
+        <div className="flex flex-col md:flex-row bg-white  overflow-hidden">
+        {/* Gallery Section */}
             <div className="w-full md:w-1/2 bg-white p-4">
               <Gallery packageView={packageView} />
             </div>
@@ -120,7 +120,7 @@ const PackageView = () => {
                 </div>
 
                 {/* Sticky Footer for Total Price and Add to Cart */}
-                <div className="sticky bottom-0 bg-white shadow-md rounded-lg py-6 px-8 mt-6 w-full flex items-center justify-between z-10">
+                <div className="sticky bottom-0 py-6 px-8 mt-6 w-full flex items-center justify-between z-10">
                   <span className="text-2xl font-bold text-gray-800">
                     ₹{packageTotal.toLocaleString()}
                   </span>

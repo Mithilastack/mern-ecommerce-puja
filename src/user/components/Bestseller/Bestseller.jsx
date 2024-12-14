@@ -29,7 +29,7 @@ const Bestseller = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-4 md:px-0">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-10  px-0 md:px-0">
         {currentItems.length > 0 ? (
           currentItems.map((item) => (
             <div
