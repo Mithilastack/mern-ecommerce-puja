@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    font-family: "Varela Round", serif;
-    font-weight: 100;
-    font-style: normal;
+/* Apply Roboto Condensed globally */
+@layer base {
+  * {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400; /* You can change this depending on the weight you want */
   }
+}

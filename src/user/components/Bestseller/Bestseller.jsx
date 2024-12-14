@@ -22,51 +22,51 @@ const Bestseller = () => {
 
   return (
     <div className="mt-8 px-4 md:px-16 mb-20">
-      <div className="flex items-center mb-8">
-        <h2 className="text-2xl font-bold text-center">PUJA PACKAGES</h2>
-        <Link to="/allproducts" className="ml-auto">
-          <span className="text-blue-500 hover:underline cursor-pointer">
-            View All Packages
-          </span>
-        </Link>
+      <div className="flex justify-center items-center  p-6 rounded-lg">
+        <h4 className="text-4xl font-extrabold text-red-500 uppercase">
+          PUJA PACKAGES
+        </h4>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-10 mt-3 mb-9 ml-5 mr-9">
+      {/* Product Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 px-4 md:px-0">
         {currentItems.length > 0 ? (
           currentItems.map((item) => (
             <div
-              className="lg:w-1/4 md:w-1/2 p-4 w-full rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-3xl cursor-pointer"
+              className="relative bg-white rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
               key={item.id}
             >
               <Link
                 to={`/packageview/${item.id}`}
-                className="block relative h-48 rounded overflow-hidden"
+                className="block relative rounded overflow-hidden"
               >
                 <img
                   alt={item.title}
-                  className="object-cover object-center w-full h-full block bg-transparent"
+                  className="object-cover object-center w-full h-44 md:h-52 bg-gray-100"
                   src={item.image}
+                  loading="lazy"
                 />
               </Link>
-              <div className="mt-4 flex justify-between items-center">
-                <div>
-                  <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1 text-sm font-semibold">${item.price}</p>
-                  <p className="mt-1 text-xs text-gray-600 font-medium">
-                    Ratings:{" "}
-                    <span className="text-yellow-400 bg-gray-100 rounded px-1 py-1 font-bold">
-                      {item.rating ? item.rating.toFixed(1) : "No ratings yet"}{" "}
-                      ★
-                    </span>
-                  </p>
-                </div>
+              <div className="p-3">
+                <h3 className="text-gray-700 text-sm font-medium truncate">
+                  {item.title}
+                </h3>
+                <p className="text-gray-900 text-sm font-semibold mt-1">
+                  ₹{item.price}
+                </p>
+                <p className="text-xs text-gray-500 mt-1">
+                  Ratings:{" "}
+                  <span className="text-yellow-500 font-bold">
+                    {item.rating ? item.rating.toFixed(1) : "No ratings yet"} ★
+                  </span>
+                </p>
               </div>
             </div>
           ))
         ) : (
-          <p>No products available</p>
+          <p className="text-center col-span-2 md:col-span-3">
+            No products available
+          </p>
         )}
       </div>
 

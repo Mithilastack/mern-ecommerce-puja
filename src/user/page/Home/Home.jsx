@@ -1,9 +1,8 @@
-import React from 'react'
-import Layout from '../../components/Layout/Layout'
-import HeroSection from '../../components/HeroSection/HeroSection'
+import React from "react";
+import Layout from "../../components/Layout/Layout";
+import HeroSection from "../../components/HeroSection/HeroSection";
 
-const home = ({cart}) => {
-
+const home = ({ cart }) => {
   // const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
   // // console.log(totalQuantity);
@@ -11,8 +10,8 @@ const home = ({cart}) => {
   return (
     <Layout>
       <HeroSection />
-    </Layout >
-  )
-}
+    </Layout>
+  );
+};
 
-export default home
+export default home;
