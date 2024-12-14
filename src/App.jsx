@@ -18,6 +18,7 @@ import Categories from "./admin/pages/Categories";
 import PackageView from "./user/components/packageView/packageView";
 import { AuthProvider } from "./Contexts/AuthContext";
 import ContactUs from "./user/page/ContactUs/ContactUs";
+import CheckoutPage from "./user/page/CheckoutPage/CheckoutPage";
 
 const App = () => {
   return (
@@ -38,6 +39,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/contactus" element={<ContactUs/>} />
+          <Route path="/checkout" element={<CheckoutPage/>} />
+
 
 
           {/* Admin routes */}

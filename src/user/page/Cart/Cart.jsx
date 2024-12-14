@@ -19,7 +19,7 @@ function Cart() {
         <div className="flex items-center space-x-4 w-full sm:w-[40%]">
           <img
             className="w-24 h-24 rounded-lg object-cover"
-            src={item.thumbnail}
+            src={item.image}
             alt={item.title}
           />
           <div>
@@ -131,12 +131,14 @@ function Cart() {
                 <span className="font-semibold">${totalCost.toFixed(2)}</span>
               </div>
               <div className="mt-6">
-                <button
-                  className="bg-indigo-500 w-full py-3 text-white font-semibold rounded-md hover:bg-indigo-600 transition duration-200"
-                  aria-label="Proceed to checkout"
-                >
-                  Checkout
-                </button>
+                <Link to="/checkout">
+                  <button
+                    className="bg-indigo-500 w-full py-3 text-white font-semibold rounded-md hover:bg-indigo-600 transition duration-200"
+                    aria-label="Proceed to checkout"
+                  >
+                    Checkout
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
