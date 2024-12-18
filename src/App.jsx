@@ -54,15 +54,14 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/profile"
             element={
-              // <PrivateRoute>
-                <ProfilePage />
-              // </PrivateRoute>
-              
+              <PrivateRoute>
+              <ProfilePage />
+              </PrivateRoute>
             }
-          />
+          /> */}
 
           {/* Admin routes */}
           <Route
@@ -71,7 +70,6 @@ const App = () => {
               <AdminRoute>
                 <DashboardLayout />
               </AdminRoute>
-              
             }
           >
             <Route index element={<DashboardPage />} />
