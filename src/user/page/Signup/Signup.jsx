@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";  // Use useNavigate here
+import axios from "axios";
 
 const Signup = () => {
   // State to store form data
@@ -11,8 +12,11 @@ const Signup = () => {
     password: "",
   });
 
-  // State to handle error messages
+  // State to handle error and success messages
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();  // Use useNavigate hook
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -24,7 +28,7 @@ const Signup = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Simple form validation
@@ -36,19 +40,26 @@ const Signup = () => {
     // Clear any previous error messages
     setError("");
 
-    // Simulate saving user data in localStorage
-    const userData = {
-      fullName: formData.fullName,
-      phoneNumber: formData.phoneNumber,
-      email: formData.email,
-      password: formData.password,
-    };
+    try {
+      // Make the signup request to the backend
+      const response = await axios.post("http://localhost:9000/api/v1/auth/signup", {
+        name: formData.fullName,
+        phoneNumber: formData.phoneNumber,
+        email: formData.email,
+        password: formData.password,
+      });
 
-    // Save the user data to localStorage
-    localStorage.setItem("user", JSON.stringify(userData));
-
-    // Optionally, show a success message or redirect to login
-    alert("Signup successful! You can now log in.");
+      if (response.data.success) {
+        setMessage("Signup successful! You can now log in.");
+        // Redirect to login page after successful signup
+        setTimeout(() => {
+          navigate("/login");  // Use navigate to redirect
+        }, 2000);
+      }
+    } catch (err) {
+      // Handle server-side validation or errors
+      setError(err.response ? err.response.data.message : "Error occurred during signup.");
+    }
   };
 
   return (
@@ -60,7 +71,8 @@ const Signup = () => {
               Sign Up
             </h2>
 
-            {/* Error Message */}
+            {/* Error or Success Message */}
+            {message && <p className="text-green-500 text-sm text-center">{message}</p>}
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
             {/* Signup Form */}

@@ -1,28 +1,50 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../Contexts/AuthContext';
 import Layout from '../../components/Layout/Layout';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useAuth(); // Get the login function from AuthContext
   const navigate = useNavigate();
 
+  // Handle login form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); // Clear any previous error
 
-    // Call the login function from context
-    const user = await login({ email, password });
+    // Simple form validation
+    if (!email || !password) {
+      setError('Email and password are required.');
+      return;
+    }
 
-    if (user) {
-      // If login successful, redirect to home
-      navigate('/');
-    } else {
-      // If login fails, set error message
-      setError('Invalid email or password.');
+    try {
+      // Make a POST request to the backend for login
+      const response = await fetch('http://localhost:9000/api/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // If login is successful, save the token in localStorage or context
+        localStorage.setItem('authToken', data.token);
+        navigate('/'); // Redirect to home page
+      } else {
+        // If login fails, set the error message from the response
+        setError(data.message || 'Invalid email or password.');
+      }
+    } catch (err) {
+      // Handle any network errors
+      setError('Something went wrong. Please try again later.');
     }
   };
 
