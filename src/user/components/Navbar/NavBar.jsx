@@ -1,32 +1,42 @@
-// NavBar.jsx
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { CartContext } from "../../../Contexts/CartContext";
+import { useAuth } from "../../../Contexts/AuthContext"; // Import AuthContext
 
 const NavBar = () => {
   const { cart } = useContext(CartContext);
-  // const { cart } = useCartContext();
-
+  const { user, logout } = useAuth(); // Get user and logout function from AuthContext
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); // For profile hover menu
 
   const ToggleOpen = () => {
     setIsOpen(true);
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
   };
 
   const ToggleClose = () => {
     setIsOpen(false);
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = "auto"; // Restore scrolling when menu is closed
+  };
+
+  const handleProfileMenuToggle = () => {
+    setIsProfileMenuOpen((prevState) => !prevState);
   };
 
   useEffect(() => {
+    // Reset profile menu when logged out
+    if (!user) {
+      setIsProfileMenuOpen(false);
+    }
+
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [user]); // Re-run on user change
 
   return (
     <header className="bg-white border-b border-gray-200 relative">
@@ -47,10 +57,10 @@ const NavBar = () => {
                 All Products
               </li>
             </Link>
-          
-            
             <Link to="/contactus">
-              <li className="mr-5 hover:text-gray-900 cursor-pointer">Contact Us</li>
+              <li className="mr-5 hover:text-gray-900 cursor-pointer">
+                Contact Us
+              </li>
             </Link>
           </ul>
         </nav>
@@ -64,7 +74,6 @@ const NavBar = () => {
               <Link to="/allproducts" onClick={ToggleClose}>
                 <li className="hover:text-gray-300">All Products</li>
               </Link>
-              
               <Link to="/contactus" onClick={ToggleClose}>
                 <li className="hover:text-gray-300">Contact Us</li>
               </Link>
@@ -79,13 +88,45 @@ const NavBar = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-3">
-          <Link to="/login">
-            <button className="font-semibold bg-gray-100 py-2 px-4 hover:bg-gray-200 rounded">
-              Login
-            </button>
-          </Link>
+        <div className="flex items-center gap-3 relative">
+          {/* Check if user is logged in */}
+          {!user ? (
+            <Link to="/login">
+              {console.log(user)}
+              <button className="font-semibold bg-gray-100 py-2 px-4 hover:bg-gray-200 rounded">
+                Login
+              </button>
+            </Link>
+          ) : (
+            <>
+              {console.log(user)}
 
+              {/* Profile Icon with dropdown */}
+              <div className="relative" onClick={handleProfileMenuToggle}>
+                <FaUserCircle
+                  size={30}
+                  className="text-gray-700 hover:text-gray-900 cursor-pointer"
+                  onClick={() => navigate("/profile")} // Navigate to profile page
+                />
+                {isProfileMenuOpen && (
+                  <div className="absolute right-0 bg-white shadow-lg rounded-md mt-2 w-40">
+                    <button
+                      className="w-full text-left px-4 py-2 hover:bg-gray-200"
+                      onClick={() => {
+                        logout(); // Log the user out
+                        setIsProfileMenuOpen(false); // Close the profile menu
+                        navigate("/"); // Navigate to home after logout
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+
+          {/* Shopping Cart */}
           <Link to="/cart">
             <div className="relative flex items-center cursor-pointer">
               <div className="relative">
@@ -93,7 +134,7 @@ const NavBar = () => {
                   size={25}
                   className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 />
-                {cart.length > 0 && (
+                {Array.isArray(cart) && cart.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
                     {cart.length}
                   </span>
@@ -102,6 +143,7 @@ const NavBar = () => {
             </div>
           </Link>
 
+          {/* Mobile Menu Toggle */}
           {!isOpen && (
             <button
               aria-label="Open menu"

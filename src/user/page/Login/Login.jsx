@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Layout from '../../components/Layout/Layout';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../Contexts/AuthContext"; // Import AuthContext
+import Layout from "../../components/Layout/Layout";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state for button
+  const { login } = useAuth(); // Use login function from AuthContext
   const navigate = useNavigate();
 
   // Handle login form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear any previous error
+    setError(""); // Clear any previous error
+    setLoading(true); // Start loading when the form is submitted
 
     // Simple form validation
     if (!email || !password) {
-      setError('Email and password are required.');
+      setError("Email and password are required.");
+      setLoading(false); // Stop loading if validation fails
       return;
     }
 
     try {
       // Make a POST request to the backend for login
-      const response = await fetch('http://localhost:9000/api/v1/auth/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:9000/api/v1/auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
@@ -34,17 +39,29 @@ const Login = () => {
 
       const data = await response.json();
 
+      console.log("Login Response:", data); // Log the response data for debugging
+
       if (response.ok) {
-        // If login is successful, save the token in localStorage or context
-        localStorage.setItem('authToken', data.token);
-        navigate('/'); // Redirect to home page
+        // If login is successful, store the user data and token
+        const { user, token } = data;
+        console.log("user ==> ", user)
+        console.log("token ==> ", token)
+
+        // Update the AuthContext with user data and token
+        login(user, token);
+
+        // Redirect to home page
+        navigate("/");
       } else {
-        // If login fails, set the error message from the response
-        setError(data.message || 'Invalid email or password.');
+        // If login fails, show the error message from the backend
+        setError(data.message || "Invalid email or password.");
       }
     } catch (err) {
       // Handle any network errors
-      setError('Something went wrong. Please try again later.');
+      console.error("Network error:", err); // Log network error
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false); // Stop loading after the process is done
     }
   };
 
@@ -74,7 +91,10 @@ const Login = () => {
 
           {/* Password Input */}
           <div className="relative mb-4">
-            <label htmlFor="password" className="leading-7 text-sm text-gray-600">
+            <label
+              htmlFor="password"
+              className="leading-7 text-sm text-gray-600"
+            >
               Password
             </label>
             <input
@@ -89,19 +109,22 @@ const Login = () => {
           </div>
 
           {/* Display Error Message if any */}
-          {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm text-center mb-4">{error}</p>
+          )}
 
           {/* Login Button */}
           <button
             onClick={handleSubmit} // Call handleSubmit on click
+            disabled={loading} // Disable the button when loading
             className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
           >
-            Login
+            {loading ? "Logging in..." : "Login"} {/* Show loading text */}
           </button>
 
           {/* Sign up redirect */}
           <p className="text-sm text-gray-500 mt-4 text-center">
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <Link to="/signup" className="text-red-500 hover:underline">
               Sign up
             </Link>
