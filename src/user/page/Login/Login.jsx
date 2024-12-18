@@ -1,29 +1,28 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
-import { useAuth } from "../../../Contexts/AuthContext"; // Import the AuthContext
-import Layout from "../../components/Layout/Layout";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Contexts/AuthContext';
+import Layout from '../../components/Layout/Layout';
 
 const Login = () => {
-  // State to store email, password, and error message
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // To store any error messages
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { login } = useAuth(); // Get the login function from AuthContext
+  const navigate = useNavigate();
 
-  const { login } = useAuth(); // Destructure login function from AuthContext
-  const navigate = useNavigate(); // For redirection after successful login
-
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
+    setError(''); // Clear any previous error
 
-    // For now, we simulate a login request
-    if (email === "test@example.com" && password === "password123") {
-      const fakeUser = { email, name: "John Doe", token: "fakeToken123" };
-      login(fakeUser); // Save user to context
-      navigate("/"); // Redirect to home page after login
+    // Call the login function from context
+    const user = await login({ email, password });
+
+    if (user) {
+      // If login successful, redirect to home
+      navigate('/');
     } else {
-      setError("Invalid email or password."); // Set error message
+      // If login fails, set error message
+      setError('Invalid email or password.');
     }
   };
 
@@ -34,7 +33,7 @@ const Login = () => {
           <h2 className="text-gray-900 text-2xl font-bold title-font mb-4 text-center">
             Login
           </h2>
-          
+
           {/* Email Input */}
           <div className="relative mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">
@@ -50,7 +49,7 @@ const Login = () => {
               className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-          
+
           {/* Password Input */}
           <div className="relative mb-4">
             <label htmlFor="password" className="leading-7 text-sm text-gray-600">
@@ -66,11 +65,9 @@ const Login = () => {
               className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
             />
           </div>
-          
+
           {/* Display Error Message if any */}
-          {error && (
-            <p className="text-red-500 text-sm text-center mb-4">{error}</p>
-          )}
+          {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
 
           {/* Login Button */}
           <button
@@ -79,10 +76,10 @@ const Login = () => {
           >
             Login
           </button>
-          
+
           {/* Sign up redirect */}
           <p className="text-sm text-gray-500 mt-4 text-center">
-            Don't have an account?{" "}
+            Don't have an account?{' '}
             <Link to="/signup" className="text-red-500 hover:underline">
               Sign up
             </Link>

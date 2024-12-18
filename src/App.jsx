@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./user/page/Home/Home";
 import Cart from "./user/page/Cart/Cart";
@@ -19,6 +18,7 @@ import PackageView from "./user/components/packageView/packageView";
 import { AuthProvider } from "./Contexts/AuthContext";
 import ContactUs from "./user/page/ContactUs/ContactUs";
 import CheckoutPage from "./user/page/CheckoutPage/CheckoutPage";
+import ScrollToTop from "./user/components/ScrollToTop/ScrollToTop";
 
 const App = () => {
   return (
@@ -29,6 +29,7 @@ const App = () => {
           autoClose={3000}
           hideProgressBar={false}
         />
+        <ScrollToTop /> {/* This goes outside Routes */}
         <Routes>
           {/* User routes */}
           <Route path="/" element={<Home />} />
@@ -38,10 +39,8 @@ const App = () => {
           <Route path="/packageview/:id" element={<PackageView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/contactus" element={<ContactUs/>} />
-          <Route path="/checkout" element={<CheckoutPage/>} />
-
-
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
           {/* Admin routes */}
           <Route path="/admin" element={<DashboardLayout />}>
