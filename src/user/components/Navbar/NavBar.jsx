@@ -67,7 +67,7 @@ const NavBar = () => {
 
         {isOpen && (
           <div>
-            <ul className="flex flex-col gap-10 text-2xl absolute top-[73px] left-0 h-screen w-full z-10 bg-red-500 text-white items-center justify-center font-semibold overflow-y-auto">
+            <ul className="flex flex-col gap-10 text-2xl absolute top-[73px] left-0 h-screen w-full z-50 bg-red-500 text-white items-center justify-center font-semibold overflow-y-auto">
               <Link to="/" onClick={ToggleClose}>
                 <li className="hover:text-gray-300">Home</li>
               </Link>
@@ -99,29 +99,40 @@ const NavBar = () => {
             </Link>
           ) : (
             <>
-              {console.log(user)}
-
               {/* Profile Icon with dropdown */}
-              <div className="relative" onClick={handleProfileMenuToggle}>
+              <div
+                className="relative group" // Ensure positioning is relative
+              >
                 <FaUserCircle
                   size={30}
                   className="text-gray-700 hover:text-gray-900 cursor-pointer"
                   onClick={() => navigate("/profile")} // Navigate to profile page
                 />
-                {isProfileMenuOpen && (
-                  <div className="absolute right-0 bg-white shadow-lg rounded-md mt-2 w-40">
-                    <button
-                      className="w-full text-left px-4 py-2 hover:bg-gray-200"
-                      onClick={() => {
-                        logout(); // Log the user out
-                        setIsProfileMenuOpen(false); // Close the profile menu
-                        navigate("/"); // Navigate to home after logout
-                      }}
-                    >
-                      Logout
+                <div
+                  className={`absolute right-0 bg-white shadow-lg rounded-md mt-2 w-40 ${
+                    isProfileMenuOpen ? "" : "hidden"
+                  } group-hover:block`}
+                  style={{
+                    zIndex: 999, // Ensure dropdown is on top
+                    position: "absolute", // Ensure absolute positioning for dropdown
+                  }}
+                >
+                  <Link to="/profile">
+                    <button className="w-full text-left px-4 py-2 hover:bg-gray-200">
+                      Go to Profile
                     </button>
-                  </div>
-                )}
+                  </Link>
+                  <button
+                    className="w-full text-left px-4 py-2 hover:bg-gray-200"
+                    onClick={() => {
+                      logout(); // Log the user out
+                      setIsProfileMenuOpen(false); // Close the profile menu
+                      navigate("/"); // Navigate to home after logout
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             </>
           )}
