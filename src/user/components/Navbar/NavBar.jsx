@@ -92,7 +92,6 @@ const NavBar = () => {
           {/* Check if user is logged in */}
           {!user ? (
             <Link to="/login">
-              {console.log(user)}
               <button className="font-semibold bg-gray-100 py-2 px-4 hover:bg-gray-200 rounded">
                 Login
               </button>
@@ -101,37 +100,46 @@ const NavBar = () => {
             <>
               {/* Profile Icon with dropdown */}
               <div
-                className="relative group" // Ensure positioning is relative
+                className="relative group"
+                onMouseEnter={() => setIsProfileMenuOpen(true)} // Open the dropdown when hovering over the parent div
+                onMouseLeave={() => setIsProfileMenuOpen(false)} // Close the dropdown when mouse leaves the parent div
               >
                 <FaUserCircle
                   size={30}
                   className="text-gray-700 hover:text-gray-900 cursor-pointer"
                   onClick={() => navigate("/profile")} // Navigate to profile page
                 />
+
                 <div
-                  className={`absolute right-0 bg-white shadow-lg rounded-md mt-2 w-40 ${
-                    isProfileMenuOpen ? "" : "hidden"
-                  } group-hover:block`}
+                  className={`absolute right-0 bg-white shadow-2xl rounded-md  w-48 ${
+                    isProfileMenuOpen ? "block" : "hidden"
+                  } transition-all duration-200 ease-in-out`}
                   style={{
                     zIndex: 999, // Ensure dropdown is on top
                     position: "absolute", // Ensure absolute positioning for dropdown
+                    top: "100%", // Ensure it opens just below the icon
                   }}
+                  onMouseEnter={() => setIsProfileMenuOpen(true)} // Open menu when hovering over the dropdown itself
+                  onMouseLeave={() => setIsProfileMenuOpen(false)} // Close menu when leaving the dropdown
                 >
                   <Link to="/profile">
-                    <button className="w-full text-left px-4 py-2 hover:bg-gray-200">
+                    <button className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-t-md">
                       Go to Profile
                     </button>
                   </Link>
                   <button
-                    className="w-full text-left px-4 py-2 hover:bg-gray-200"
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-b-md"
                     onClick={() => {
-                      logout(); // Log the user out
-                      setIsProfileMenuOpen(false); // Close the profile menu
-                      navigate("/"); // Navigate to home after logout
+                      setIsProfileMenuOpen(false); // Close the menu after clicking logout
+                      setTimeout(() => {
+                        logout(); // Log the user out after closing the menu
+                        navigate("/"); // Navigate to home after logout
+                      }, 100); // Add a small delay to ensure the menu closes first
                     }}
                   >
                     Logout
                   </button>
+                  
                 </div>
               </div>
             </>

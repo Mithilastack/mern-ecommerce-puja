@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import { Link, useNavigate } from "react-router-dom";  // Use useNavigate here
 import axios from "axios";
+import { BASE_URL } from "../../../config";
 
 const Signup = () => {
   // State to store form data
@@ -42,7 +43,7 @@ const Signup = () => {
 
     try {
       // Make the signup request to the backend
-      const response = await axios.post("http://localhost:9000/api/v1/auth/signup", {
+      const response = await axios.post(BASE_URL+"api/v1/auth/signup", {
         name: formData.fullName,
         phoneNumber: formData.phoneNumber,
         email: formData.email,

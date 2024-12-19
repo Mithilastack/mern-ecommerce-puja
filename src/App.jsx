@@ -6,7 +6,7 @@ import AllProducts from "./user/components/AllProducts/AllProducts";
 import Login from "./user/page/Login/Login";
 import Signup from "./user/page/Signup/Signup";
 import ProductView from "./user/page/ProductView/ProductView";
-import ProfilePage from "./user/page/ProfilePage/ProfilePage"; // Import ProfilePage
+import ProfilePage from "./user/page/ProfilePage/ProfilePage";
 import ContactUs from "./user/page/ContactUs/ContactUs";
 import CheckoutPage from "./user/page/CheckoutPage/CheckoutPage";
 import PackageView from "./user/components/packageView/packageView";
@@ -54,14 +54,14 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/profile"
             element={
               <PrivateRoute>
-              <ProfilePage />
+                <ProfilePage />
               </PrivateRoute>
             }
-          /> */}
+          />
 
           {/* Admin routes */}
           <Route

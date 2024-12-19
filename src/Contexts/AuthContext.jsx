@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     const storedAuthToken = localStorage.getItem("authToken");
 
-    console.log("Checking localStorage for user and token:", storedUser, storedAuthToken);
+    // console.log("Checking localStorage for user and token:", storedUser, storedAuthToken);
 
     if (storedUser && storedUser !== "undefined") {
       try {
@@ -25,13 +25,12 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
-    // If user and token exist in localStorage, we assume the user is logged in
     if (storedAuthToken && storedUser) {
       setAuthToken(storedAuthToken);
     }
 
     setLoading(false);
-  }, []); // Runs once when component mounts
+  }, []); 
 
   // Login function: sets user and token, logs changes
   const login = (userData, token) => {
@@ -59,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
   // Log user state changes whenever it updates
   useEffect(() => {
-    console.log("User state updated:", user);
+    // console.log("User state updated:", user);
   }, [user]);
 
   return (
@@ -72,6 +71,6 @@ export const AuthProvider = ({ children }) => {
 // Custom Hook to use Auth Context
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  console.log("Accessing user from context:", context.user); // Log user every time context is accessed
+
   return context;
 };

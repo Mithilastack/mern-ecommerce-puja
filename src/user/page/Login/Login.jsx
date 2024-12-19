@@ -27,7 +27,7 @@ const Login = () => {
 
     try {
       // Make a POST request to the backend for login
-      const response = await fetch(BASE_URL+"/auth/login", {
+      const response = await fetch(BASE_URL + "/api/v1/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,8 +45,8 @@ const Login = () => {
       if (response.ok) {
         // If login is successful, store the user data and token
         const { user, token } = data;
-        console.log("user ==> ", user)
-        console.log("token ==> ", token)
+        console.log("user ==> ", user);
+        console.log("token ==> ", token);
 
         // Update the AuthContext with user data and token
         login(user, token);
